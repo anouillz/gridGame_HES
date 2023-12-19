@@ -1,0 +1,15 @@
+- Class Reversi:
+        - grid: array de coin de 8x8
+        - Méthodes:
+            - play:
+            - isOccupied:
+            - isLegal:
+            - placeCoin:
+                - param: x,y
+            - endGame:
+
+- Class Coin:
+        - c, la couleur
+
+- Objet compagnon Reversi:
+        - lance le jeu
