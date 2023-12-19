@@ -3,5 +3,6 @@ object Main {
     println("Hello world")
     print("YOOOOO")
     print("Trop belle ANa")
+    print("UwU")
   }
 }
