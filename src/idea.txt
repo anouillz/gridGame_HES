@@ -8,8 +8,16 @@
                 - param: x,y
             - endGame:
 
+- Class GameManager :
+        - Gère le tournus des joueurs
+        - Méthodes:
+            - askTurn:
+            - displayScore:
+            - askGameMode:
+
 - Class Coin:
         - c, la couleur
+        - busy: Boolean
 
 - Objet compagnon Reversi:
         - lance le jeu

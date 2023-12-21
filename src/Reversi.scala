@@ -1,3 +1,14 @@
+
+
+class Reversi {
+
+
+}
+
+
+
+
+
 object Reversi {
 
 }
