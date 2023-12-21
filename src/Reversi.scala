@@ -10,6 +10,21 @@ class Coin(c : Color, busy : Boolean){
 
 }
 
+class GameManager {
+
+  def askGameMode(b : Boolean): Unit = {
+
+  }
+  def askTurn(): Unit = {
+
+  }
+  def displayscore(): String = {
+
+    return "aa"
+  }
+
+
+}
 
 
 
