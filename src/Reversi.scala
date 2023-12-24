@@ -1,8 +1,15 @@
 import java.awt.Color
+import hevs.graphics.FunGraphics
+
+import java.awt.event
+import java.awt.event.MouseListener
 
 class Reversi {
   var grid: Array[Array[Coin]] = Array.ofDim(8,8)
   var gm : GameManager = new GameManager(false)
+  var display: FunGraphics = new FunGraphics(300,300,"Reversi")
+  display.addMouseListener(MouseListener)
+
 
   // TODO
   def play(): Unit ={
@@ -75,7 +82,7 @@ class Reversi {
         grid(x)(y).c = Color.black
       gm.turn = !gm.turn
     }
-    // TODO
+
   }
 
 
@@ -94,7 +101,7 @@ class Reversi {
   def fillGrid(tab : Array[Array[Coin]]): Array[Array[Coin]] = {
     for(i <- tab.indices){
       for(j <- tab(i).indices){
-        var token: Coin = new Coin((i + ('A'.toInt)).toChar, j+1, Color.green,false)
+        var token: Coin = new Coin((i + 'A'.toInt).toChar, j+1, Color.green,false)
         tab(i)(j) = token
       }
     }
@@ -138,17 +145,19 @@ class Reversi {
 
 
 class Coin(var row: Char, var col: Int, var c: Color, var busy: Boolean){
+
 }
 
 class GameManager(var turn : Boolean) {
+  // Default 1 player mode
+  var gameMode: Int = 1
 
-
-  // TODO
   def askGameMode(b : Boolean): Unit = {
-    // TODO
+    println("Game mode: 1 player (1) - 2 players (2)")
+    var gameMode = Input.readInt()
   }
 
-  def askTurn(): Unit = {
+  def changeTurn(): Unit = {
     // false = noir
     // true = blanc
     if (turn)
