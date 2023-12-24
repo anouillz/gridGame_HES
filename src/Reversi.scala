@@ -152,7 +152,7 @@ class GameManager(var turn : Boolean) {
   // Default 1 player mode
   var gameMode: Int = 1
 
-  def askGameMode(b : Boolean): Unit = {
+  def askGameMode(): Unit = {
     println("Game mode: 1 player (1) - 2 players (2)")
     var gameMode = Input.readInt()
   }

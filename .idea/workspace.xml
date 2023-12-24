@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="update method isLegal">
-      <change afterPath="$PROJECT_DIR$/fungraphics-1.5.12.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dialogs.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Input.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
-    </list>
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="update method askGameMode&#10;new FunGraphics &#10;new MouseListener" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703416288423</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update method askGameMode&#10;new FunGraphics &#10;new MouseListener">
+      <option name="closed" value="true" />
+      <created>1703424160391</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1703424160391</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,6 +169,7 @@
     <MESSAGE value="new Class GameManager" />
     <MESSAGE value="update method play" />
     <MESSAGE value="update method isLegal" />
-    <option name="LAST_COMMIT_MESSAGE" value="update method isLegal" />
+    <MESSAGE value="update method askGameMode&#10;new FunGraphics &#10;new MouseListener" />
+    <option name="LAST_COMMIT_MESSAGE" value="update method askGameMode&#10;new FunGraphics &#10;new MouseListener" />
   </component>
 </project>
