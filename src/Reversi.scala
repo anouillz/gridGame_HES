@@ -2,16 +2,16 @@ import java.awt.Color
 
 class Reversi {
   var grid: Array[Array[Coin]] = Array.ofDim(8,8)
-  var selected: Coin
   var gm : GameManager = new GameManager(false)
 
   // TODO
   def play(): Unit ={
     grid = fillGrid(grid)
-
   }
 
-  // TODO
+  def askPlacement(): Unit = {
+
+  }
 
   def isOccupied(row: Int, col: Int): Boolean = {
     if (!grid(row)(col).busy){
@@ -20,16 +20,54 @@ class Reversi {
     return true
   }
 
-  // TODO
 
-  def isLegal(): Boolean = {
-    return true
-  }
+  // @param x, y: coordinate of choosen placement
+  // @param color: color of players coin
+  def isLegal(x: Int, y: Int, color: Color): Boolean = {
+    if (isOccupied(x, y)){
+      return false
+    }
+
+    // all possible directions
+    for (i <- -1 to 1) {
+      for (j <- -1 to 1) {
+        if (i != 0 || j != 0) { // On ignore car cela voudrait dire rester à la même place
+          var nx = x + i
+          var ny = y + j
+
+          // on continue dans la même direction si le jeton est toujours de la couleur opposée
+          // tjr dans les limites de la grille
+          if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).c != color) {
+            nx += i
+            ny += j
+
+            // on continue dans la direction et on check les possibilités
+            while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8) {
+              // La dernière cellule de la ligne est vide, donc pas possible de mettre un jeton aux coordonnées x,y
+              if (!grid(nx)(ny).busy) {
+                return false
+              } else if (grid(nx)(ny).c == color) {
+              // A la fin de la ligne, on trouve un jeton de notre couleur, on peut donc placer le jeton aux coordonnées x,y
+                return true
+              }
+
+              // tant que les jetons trouvés sont de la couleur opposée, on avance dans la même direction
+              nx += i
+              ny += j
+            }
+          }
+        }
+      }
+    }
+  // If we've checked all directions and none of them worked, the move is not legal
+  return false
+}
 
   // TODO
 
   def placeCoin(x: Int, y: Int): Unit = {
-    if(!(isOccupied(x,y)) && isLegal()){
+    // TODO: Check la couleur de isLegal
+    if(!(isOccupied(x,y)) && isLegal(x,y, Color.black)){
       grid(x)(y).busy = true
       if (gm.turn) {
         grid(x)(y).c = Color.white
@@ -41,7 +79,9 @@ class Reversi {
   }
 
 
-  def updateCoins(c : Color,x : Int, y : Int)
+  def updateCoins(c : Color,x : Int, y : Int): Unit = {
+
+  }
 
   //TODO
 
@@ -49,7 +89,6 @@ class Reversi {
     // TODO
     return true
   }
-
 
 
   def fillGrid(tab : Array[Array[Coin]]): Array[Array[Coin]] = {
