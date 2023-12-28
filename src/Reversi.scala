@@ -7,13 +7,24 @@ import java.awt.event.MouseListener
 class Reversi {
   var grid: Array[Array[Coin]] = Array.ofDim(8,8)
   var gm : GameManager = new GameManager(false)
-  var display: FunGraphics = new FunGraphics(300,300,"Reversi")
-  display.addMouseListener(MouseListener)
+  //var display: FunGraphics = new FunGraphics(300,300,"Reversi")
+  //display.addMouseListener(MouseListener)
 
 
   // TODO
   def play(): Unit ={
+    //fill grid with the default configuration
     grid = fillGrid(grid)
+
+    //asks game mode and adapts game to it
+    gm.askGameMode()
+    if (gm.gameMode == 1){
+
+    }
+
+    if(gm.gameMode == 2) {
+
+    }
   }
 
   def askPlacement(): Unit = {
@@ -141,6 +152,46 @@ class Reversi {
     return count
   }
 
+  // test game in the console -- O = white coins -- X = black coins
+  override def toString: String = {
+    var s: String = ""
+    s += "Game:  \n\t"
+    for (i <- grid(0).indices) {
+      s += " " + i
+    }
+    s += "\n"
+
+    for (i <- grid.indices) {
+      s += i + "\t"
+      for (j <- grid(i).indices) {
+        //s += "\t"
+        if (grid(i)(j).col <= 8) {
+          if (grid(i)(j).busy) {
+            if(grid(i)(j).c == Color.BLACK) {
+              s += " X"
+            }
+            if(grid(i)(j).c == Color.WHITE) {
+              s += " O"
+            }
+            if(grid(i)(j).c == Color.GREEN) {
+              s += " "
+            }
+          } else {
+            s += "  "
+          }
+        } else {
+          if (grid(i)(j).busy) {
+            s += "  X"
+          } else {
+            s += "   "
+          }
+        }
+      }
+      s += "\n"
+    }
+    return s
+  }
+
 }
 
 
@@ -177,5 +228,13 @@ class GameManager(var turn : Boolean) {
 
 
 object Reversi extends App{
+
+  var g: Reversi = new Reversi
+
+// tests
+  g.fillGrid(g.grid)
+  g.grid(3)(2).c = Color.BLACK
+  g.grid(3)(2).busy = true
+  print(g.toString)
 
 }

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="update method askGameMode&#10;new FunGraphics &#10;new MouseListener" />
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="change param in method askGameMode">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -148,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703424160391</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="change param in method askGameMode">
+      <option name="closed" value="true" />
+      <created>1703424321886</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1703424321887</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -170,6 +181,7 @@
     <MESSAGE value="update method play" />
     <MESSAGE value="update method isLegal" />
     <MESSAGE value="update method askGameMode&#10;new FunGraphics &#10;new MouseListener" />
-    <option name="LAST_COMMIT_MESSAGE" value="update method askGameMode&#10;new FunGraphics &#10;new MouseListener" />
+    <MESSAGE value="change param in method askGameMode" />
+    <option name="LAST_COMMIT_MESSAGE" value="change param in method askGameMode" />
   </component>
 </project>
