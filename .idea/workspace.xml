@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="change param in method askGameMode">
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="new method to string to test the console game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
     </list>
@@ -13,8 +13,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Scala Worksheet" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/fungraphics-1.5.12.jar!/hevs/index.html" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/fungraphics-1.5.12.jar!/hevs/package.scala" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/fungraphics-1.5.12.jar!/hevs/utils/Input.scala" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
@@ -35,7 +47,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/anagoncalves/IdeaProjects/GridGame/src"
+    "last_opened_file_path": "/Users/anagoncalves/IdeaProjects/GridGame/src",
+    "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -66,7 +79,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.9-temurin-17.0.9-249ae16d76d6-4a08a015" />
+        <option value="jdk-17.0.9-temurin-17.0.9-f644763e9732-45d2320c" />
       </set>
     </attachedChunks>
   </component>
@@ -159,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703424321887</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="new method to string to test the console game">
+      <option name="closed" value="true" />
+      <created>1703795678732</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1703795678732</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,6 +203,7 @@
     <MESSAGE value="update method isLegal" />
     <MESSAGE value="update method askGameMode&#10;new FunGraphics &#10;new MouseListener" />
     <MESSAGE value="change param in method askGameMode" />
-    <option name="LAST_COMMIT_MESSAGE" value="change param in method askGameMode" />
+    <MESSAGE value="new method to string to test the console game" />
+    <option name="LAST_COMMIT_MESSAGE" value="new method to string to test the console game" />
   </component>
 </project>

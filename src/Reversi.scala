@@ -27,9 +27,6 @@ class Reversi {
     }
   }
 
-  def askPlacement(): Unit = {
-
-  }
 
   def isOccupied(row: Int, col: Int): Boolean = {
     if (!grid(row)(col).busy){
@@ -218,11 +215,34 @@ class GameManager(var turn : Boolean) {
   }
 
 
-
   def displayscore(w : Int, b : Int): String = {
     return s"$w - $b"
   }
+
   // TODO
+  def askPlacement(): Int = {
+    var choice: Int = 0
+    if (!turn){
+      println("Player 1 place your next coin (ex: 11)")
+      choice = Input.readInt()
+      while((choice > 77) || (choice < 0)){
+        println("Use the format: 01")
+        choice = Input.readInt()
+      }
+    } else if ((turn) && (gameMode == 2)){
+      println("Player 2 place your next coin (ex: 11)")
+      choice = Input.readInt()
+      while((choice > 77) || (choice < 0)){
+        println("Use the format: 01")
+        choice = Input.readInt()
+      }
+    }
+    return choice
+  }
+
+
+
+
 }
 
 
