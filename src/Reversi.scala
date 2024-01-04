@@ -36,37 +36,37 @@ class Reversi {
   }
 
 
-  // @param x, y: coordinate of choosen placement
-  // @param color: color of players coin
+  // @param x, y: coordinate of chosen placement
+  // @param color: color of players coin (the one who wants to make the move)
   def isLegal(x: Int, y: Int, color: Color): Boolean = {
     if (isOccupied(x, y)){
+      //println("Position is already occupied")
       return false
     }
 
-    // all possible directions
+    // on regarde toutes les directions possibles
     for (i <- -1 to 1) {
       for (j <- -1 to 1) {
-        if (i != 0 || j != 0) { // On ignore car cela voudrait dire rester à la même place
+        if (i != 0 || j != 0) { // Ignore the position of chosen coin
           var nx = x + i
           var ny = y + j
+          var continueLoop = true //control the loop
 
-          // on continue dans la même direction si le jeton est toujours de la couleur opposée
-          // tjr dans les limites de la grille
-          if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).c != color) {
+          // Check if the next position is inside the grid and contains a coin of the opposite color
+          if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != color) {
             nx += i
             ny += j
 
-            // on continue dans la direction et on check les possibilités
-            while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8) {
-              // La dernière cellule de la ligne est vide, donc pas possible de mettre un jeton aux coordonnées x,y
+            // continue in the same direction
+            while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && continueLoop) {
+              // If the next position is empty, set continueLoop to false to stop the loop
               if (!grid(nx)(ny).busy) {
-                return false
+                continueLoop = false
               } else if (grid(nx)(ny).c == color) {
-              // A la fin de la ligne, on trouve un jeton de notre couleur, on peut donc placer le jeton aux coordonnées x,y
+                // If the next position contains a coin of the same color -> the move is legal
                 return true
               }
 
-              // tant que les jetons trouvés sont de la couleur opposée, on avance dans la même direction
               nx += i
               ny += j
             }
@@ -74,28 +74,64 @@ class Reversi {
         }
       }
     }
-  // If we've checked all directions and none of them worked, the move is not legal
-  return false
+
+    // if no valid line of coins was found in any direction, the move is not legal
+    //println("No valid line of coins found")
+    return false
 }
 
   // TODO
 
-  def placeCoin(x: Int, y: Int): Unit = {
-    // TODO: Check la couleur de isLegal
-    if(!(isOccupied(x,y)) && isLegal(x,y, Color.black)){
+  // @param x, y: coordinate of chosen coin placement
+  // @param color: color of players coin (the one who wants to make the move)
+  def placeCoin(x: Int, y: Int, c: Color): Unit = {
+    //println("B")
+    if(!(isOccupied(x,y)) && isLegal(x,y,c)){
+      //println("A")
       grid(x)(y).busy = true
-      if (gm.turn) {
-        grid(x)(y).c = Color.white
-      } else
-        grid(x)(y).c = Color.black
+      grid(x)(y).c = c
+      updateCoins(x,y,c)
       gm.turn = !gm.turn
     }
+}
 
-  }
 
+  def updateCoins(x: Int, y: Int, c: Color): Unit = {
+    // all possible directions
+    for (i <- -1 to 1) {
+      for (j <- -1 to 1) {
+        if (i != 0 || j != 0) { // Ignore the current position
+          var nx = x + i
+          var ny = y + j
 
-  def updateCoins(c : Color,x : Int, y : Int): Unit = {
+          // Check if the next position is within the grid and contains a coin of the opposite color
+          if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != c) {
+            nx += i
+            ny += j
 
+            // Continue in the same direction
+            while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy) {
+              if (grid(nx)(ny).c == c) {
+                // If the next position contains a coin of the same color, flip all the coins in the line
+                var flipX = x + i
+                var flipY = y + j
+                while ((flipX != nx || flipY != ny) && grid(flipX)(flipY).busy) {
+                  grid(flipX)(flipY).c = c
+                  flipX += i
+                  flipY += j
+                }
+                // Break the loop after flipping the coins
+                nx = 8
+                ny = 8
+              }
+
+              nx += i
+              ny += j
+            }
+          }
+        }
+      }
+    }
   }
 
   //TODO
@@ -242,7 +278,6 @@ class GameManager(var turn : Boolean) {
 
 
 
-
 }
 
 
@@ -253,8 +288,10 @@ object Reversi extends App{
 
 // tests
   g.fillGrid(g.grid)
+  println(g.isLegal(2,3,Color.BLACK))
   g.grid(3)(2).c = Color.BLACK
   g.grid(3)(2).busy = true
+  g.placeCoin(2,3,Color.BLACK)
   print(g.toString)
 
 }
