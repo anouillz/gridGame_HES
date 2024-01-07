@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="method askPlacement on GameManager">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Coin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Coin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,12 +24,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "anouillz"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;anouillz&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>

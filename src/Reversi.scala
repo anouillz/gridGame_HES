@@ -136,11 +136,35 @@ class Reversi {
 
   //TODO
 
+  // test for different way game finish : all places occupied / no more legal move for the player whose turn it is / only one type of color on the board
   def endGame(): Boolean = {
-    // TODO
+    if (checkFillGrid()){
+
+    }
     return true
   }
 
+  def checkFillGrid(): Boolean = {
+    for (i <- grid.indices) {
+      for (j <- grid(i).indices) {
+        if (!(grid(i)(j).busy)) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
+  def checkOneColorOnly() : Boolean = {
+    for (i <- grid.indices){
+      for (j <- grid(i).indices){
+        if (grid(i)(j).busy){
+          var checkColor = grid(i)(j).c
+        }
+      }
+    }
+    return true
+  }
 
   def fillGrid(tab : Array[Array[Coin]]): Array[Array[Coin]] = {
     for(i <- tab.indices){
@@ -276,8 +300,6 @@ class GameManager(var turn : Boolean) {
     return choice
   }
 
-
-
 }
 
 
@@ -292,6 +314,9 @@ object Reversi extends App{
   g.grid(3)(2).c = Color.BLACK
   g.grid(3)(2).busy = true
   g.placeCoin(2,3,Color.BLACK)
+  g.placeCoin(2,2,Color.WHITE)
+  g.placeCoin(4,2,Color.WHITE)
   print(g.toString)
+
 
 }
