@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="made method updateCoin, tested and it works">
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="method askPlacement on GameManager">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Coin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Coin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,11 +26,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="30e4cd816b7e057ff579edf553ee6d8250122ab4" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -59,17 +59,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Reversi.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "44485846",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/anagoncalves/IdeaProjects/GridGame/src",
-    "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Reversi.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/anagoncalves/IdeaProjects/GridGame/src&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.intellij.sdk.settings.AppSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -207,15 +207,7 @@
       <option name="project" value="LOCAL" />
       <updated>1704394353256</updated>
     </task>
-    <task id="LOCAL-00013" summary="made method updateCoin, tested and it works">
-      <option name="closed" value="true" />
-      <created>1704397894717</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1704397894717</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -240,7 +232,17 @@
     <MESSAGE value="change param in method askGameMode" />
     <MESSAGE value="new method to string to test the console game" />
     <MESSAGE value="method askPlacement on GameManager" />
-    <MESSAGE value="made method updateCoin, tested and it works" />
-    <option name="LAST_COMMIT_MESSAGE" value="made method updateCoin, tested and it works" />
+    <option name="LAST_COMMIT_MESSAGE" value="method askPlacement on GameManager" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/Reversi.scala</url>
+          <line>21</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

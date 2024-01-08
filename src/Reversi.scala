@@ -17,16 +17,26 @@ class Reversi {
     grid = fillGrid(grid)
 
     while((!checkLegalMoves()) || (!checkFillGrid())){
+      print(toString)
+      if (!gm.turn){
+        var step1: String = gm.askPlacement()
+        isLegal(step1(0).toInt, step1(1).toInt, Color.BLACK)
+        placeCoin(step1(0).toInt,step1(1).toInt,Color.BLACK)
+      }
+      else {
+        var step1: String = gm.askPlacement()
+        isLegal(step1(0).toInt, step1(1).toInt, Color.WHITE)
+        placeCoin(step1(0).toInt,step1(1).toInt,Color.WHITE)
 
-
-
-
+      }
+      gm.changeTurn()
 
     }
 
-    if(gm.gameMode == 2) {
-
+    if (countBlack()>countWhite()){
+      print(s"Black win : $countBlack")
     }
+    else print(s"White win : $countWhite()")
   }
 
 
@@ -280,9 +290,6 @@ class Coin(var row: Char, var col: Int, var c: Color, var busy: Boolean){
 }
 
 class GameManager(var turn : Boolean) {
-  // Default 1 player mode
-  var gameMode: Int = 1
-
   def askGameMode(): Unit = {
     println("Game mode: 1 player (1) - 2 players (2)")
     var gameMode = Input.readInt()
@@ -303,24 +310,29 @@ class GameManager(var turn : Boolean) {
   }
 
   // TODO
-  def askPlacement(): Int = {
-    var choice: Int = 0
+  def askPlacement(): String = {
+    var choice: String = ""
+    var caseSelected : String = ""
     if (!turn){
-      println("Player 1 place your next coin (ex: 11)")
-      choice = Input.readInt()
-      while((choice > 77) || (choice < 0)){
-        println("Use the format: 01")
-        choice = Input.readInt()
+      println("Player 1 place your next coin (ex: A1)")
+      choice = Input.readString()
+      caseSelected = ((choice(0)-65).toString + choice(1).toString)
+      while((caseSelected.toInt > 77) || (caseSelected.toInt < 0)){
+        println("Use the format: A0")
+        choice = Input.readString()
+        caseSelected = ((choice(0)-65).toString + choice(1).toString)
       }
-    } else if ((turn) && (gameMode == 2)){
-      println("Player 2 place your next coin (ex: 11)")
-      choice = Input.readInt()
-      while((choice > 77) || (choice < 0)){
-        println("Use the format: 01")
-        choice = Input.readInt()
+    } else if (turn){
+      println("Player 2 place your next coin (ex: A0)")
+      choice = Input.readString()
+      caseSelected = ((choice(0)-65).toString + choice(1).toString)
+      while((caseSelected.toInt > 77) || (caseSelected.toInt < 0)){
+        println("Use the format: A0")
+        choice = Input.readString()
+        caseSelected = ((choice(0)-65).toString + choice(1).toString)
       }
     }
-    return choice
+    return caseSelected
   }
 
 
@@ -332,16 +344,6 @@ class GameManager(var turn : Boolean) {
 object Reversi extends App{
 
   var g: Reversi = new Reversi
-
-// tests
-  g.fillGrid(g.grid)
-  println(g.isLegal(2,3,Color.BLACK))
-  g.grid(3)(2).c = Color.BLACK
-  g.grid(3)(2).busy = true
-  g.placeCoin(2,3,Color.BLACK)
-  g.placeCoin(2,2,Color.WHITE)
-  g.placeCoin(4,2,Color.WHITE)
-  print(g.toString)
-
+  g.play()
 
 }
