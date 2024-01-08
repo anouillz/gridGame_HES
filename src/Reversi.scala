@@ -16,15 +16,15 @@ class Reversi {
     //fill grid with the default configuration
     grid = fillGrid(grid)
 
-    //asks game mode and adapts game to it
-    gm.askGameMode()
-    if (gm.gameMode == 1){
+    while((!checkLegalMoves()) || (!checkFillGrid())){
+
+
+
+
 
     }
 
-    if(gm.gameMode == 2) {
 
-    }
   }
 
 
@@ -134,16 +134,8 @@ class Reversi {
     }
   }
 
-  //TODO
 
-  // test for different way game finish : all places occupied / no more legal move for the player whose turn it is / only one type of color on the board
-  def endGame(): Boolean = {
-    if (checkFillGrid()){
-
-    }
-    return true
-  }
-
+  // return true quand tout le plateau est occupé -> fin du jeu
   def checkFillGrid(): Boolean = {
     for (i <- grid.indices) {
       for (j <- grid(i).indices) {
@@ -155,11 +147,39 @@ class Reversi {
     return true
   }
 
-  def checkOneColorOnly() : Boolean = {
+  // param couleur: Couleur dominante
+  // return true quand il y a qu'une couleur -> fin du jeu
+  def checkOneColorOnly(couleur: Color) : Boolean = {
     for (i <- grid.indices){
       for (j <- grid(i).indices){
         if (grid(i)(j).busy){
-          var checkColor = grid(i)(j).c
+          if(couleur != grid(i)(j).c){
+            return false
+          }
+        }
+      }
+    }
+    return true
+  }
+
+  // return true quand aucun move est Legal -> fin du jeu
+  def checkLegalMoves(): Boolean = {
+    for (i <- grid.indices){
+      for(j <- grid(i).indices){
+        if(gm.turn){
+          if (isLegal(i,j, Color.WHITE)) {
+            // si aucun move pour le blanc -> tour du noir
+            println("Pas de placement possible, on passe ton tour")
+            gm.turn = false
+            return false
+          }
+        } else {
+          if (isLegal(i,j,Color.BLACK)){
+            // si aucun move pour le noir -> tour du blanc
+            println("Pas de placement possible, on passe ton tour")
+            gm.turn = true
+            return false
+          }
         }
       }
     }
