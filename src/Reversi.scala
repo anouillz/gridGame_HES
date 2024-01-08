@@ -47,10 +47,10 @@ class Reversi {
     // on regarde toutes les directions possibles
     for (i <- -1 to 1) {
       for (j <- -1 to 1) {
-        if (i != 0 || j != 0) { // Ignore the position of chosen coin
-          var nx = x + i
-          var ny = y + j
-          var continueLoop = true //control the loop
+        if (i != 0 || j != 0) { // ignore position of chosen coin
+          var nx: Int = x + i
+          var ny: Int = y + j
+          var continueLoop: Boolean = true //control the loop
 
           // Check if the next position is inside the grid and contains a coin of the opposite color
           if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != color) {
@@ -59,11 +59,11 @@ class Reversi {
 
             // continue in the same direction
             while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && continueLoop) {
-              // If the next position is empty, set continueLoop to false to stop the loop
+              // if next position is empty, set continueLoop to false to stop the loop
               if (!grid(nx)(ny).busy) {
                 continueLoop = false
               } else if (grid(nx)(ny).c == color) {
-                // If the next position contains a coin of the same color -> the move is legal
+                // if next position is a coin of the same color -> the move is legal
                 return true
               }
 
@@ -76,7 +76,6 @@ class Reversi {
     }
 
     // if no valid line of coins was found in any direction, the move is not legal
-    //println("No valid line of coins found")
     return false
 }
 
@@ -100,29 +99,29 @@ class Reversi {
     // all possible directions
     for (i <- -1 to 1) {
       for (j <- -1 to 1) {
-        if (i != 0 || j != 0) { // Ignore the current position
-          var nx = x + i
-          var ny = y + j
+        if (i != 0 || j != 0) { // ignore current coin
+          var nx: Int = x + i
+          var ny: Int = y + j
 
-          // Check if the next position is within the grid and contains a coin of the opposite color
+
           if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != c) {
             nx += i
             ny += j
 
-            // Continue in the same direction
+            // goes in the same direction
             while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy) {
               if (grid(nx)(ny).c == c) {
-                // If the next position contains a coin of the same color, flip all the coins in the line
-                var flipX = x + i
-                var flipY = y + j
+                // if next position is a coin of the same color, flip all the coins in the line
+                var flipX: Int = x + i
+                var flipY: Int = y + j
                 while ((flipX != nx || flipY != ny) && grid(flipX)(flipY).busy) {
                   grid(flipX)(flipY).c = c
                   flipX += i
                   flipY += j
                 }
-                // Break the loop after flipping the coins
+                // instruction to leave the loop after flipping all the coins
                 nx = 8
-                ny = 8
+
               }
 
               nx += i
@@ -133,8 +132,6 @@ class Reversi {
       }
     }
   }
-
-  //TODO
 
   def endGame(): Boolean = {
     // TODO
@@ -286,11 +283,10 @@ object Reversi extends App{
 
   var g: Reversi = new Reversi
 
-// tests
+//tests
   g.fillGrid(g.grid)
-  println(g.isLegal(2,3,Color.BLACK))
-  g.grid(3)(2).c = Color.BLACK
-  g.grid(3)(2).busy = true
+  //println(g.isLegal(2,3,Color.BLACK))
+
   g.placeCoin(2,3,Color.BLACK)
   print(g.toString)
 
