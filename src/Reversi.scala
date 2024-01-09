@@ -6,6 +6,7 @@ import java.awt.event.MouseListener
 
 class Reversi {
   var grid: Array[Array[Coin]] = Array.ofDim(8,8)
+  grid = fillGrid(grid)
   var gm : GameManager = new GameManager(false)
   //var display: FunGraphics = new FunGraphics(300,300,"Reversi")
   //display.addMouseListener(MouseListener)
@@ -16,24 +17,26 @@ class Reversi {
   // TODO
   def play(): Unit ={
     //fill grid with the default configuration
-    grid = fillGrid(grid)
 
-    while((!checkLegalMoves()) || (!checkFillGrid())){
+    // TODO: rajouter bothCheckLegal dans la condition
+    while((!checkFillGrid())){
       print(toString)
+      println(gm.turn)
+      // si turn = true ET checklegel pour blanc = vrai => CHANGETURN (vice versa)
       if (!gm.turn){
         var step1: String = gm.askPlacement()
-        isLegal(step1(0).toInt, step1(1).toInt, Color.BLACK)
-        placeCoin(step1(0).toInt,step1(1).toInt,Color.BLACK)
-      }
-      else {
-        var step1: String = gm.askPlacement()
-        isLegal(step1(0).toInt, step1(1).toInt, Color.WHITE)
-        placeCoin(step1(0).toInt,step1(1).toInt,Color.WHITE)
 
+        placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.BLACK)
+      } else {
+        var step1: String = gm.askPlacement()
+
+        placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.WHITE)
       }
-      gm.changeTurn()
 
     }
+
+    //TODO: Implémentez ce qui se passe quand méthode checkLegalMoves est vrai
+
 
     if (countBlack()>countWhite()){
       print(s"Black win : $countBlack")
@@ -99,13 +102,13 @@ class Reversi {
   // @param x, y: coordinate of chosen coin placement
   // @param color: color of players coin (the one who wants to make the move)
   def placeCoin(x: Int, y: Int, c: Color): Unit = {
-    //println("B")
+
     if(!(isOccupied(x,y)) && isLegal(x,y,c)){
-      //println("A")
+
       grid(x)(y).busy = true
       grid(x)(y).c = c
       updateCoins(x,y,c)
-      gm.turn = !gm.turn
+      gm.changeTurn()
     }
 }
 
@@ -177,34 +180,43 @@ class Reversi {
   }
 
   // return true quand aucun move est Legal -> fin du jeu
+  // TODO: Modifier pour que la fonction de print rien ni change rien
   def checkLegalMoves(): Boolean = {
     for (i <- grid.indices){
       for(j <- grid(i).indices){
         if(gm.turn){
-          if (isLegal(i,j, Color.WHITE)) {
+          println("blanc")
+          if (!(isLegal(i,j, Color.WHITE))) {
             // si aucun move pour le blanc -> tour du noir
-            println("Pas de placement possible, on passe ton tour")
-            gm.turn = false
+            println("Blanc: Pas de placement possible, on passe ton tour")
+            //gm.turn = false
             return false
           }
         } else {
-          if (isLegal(i,j,Color.BLACK)){
+          println("noir")
+          if (!(isLegal(i,j,Color.BLACK))){
             // si aucun move pour le noir -> tour du blanc
-            println("Pas de placement possible, on passe ton tour")
-            gm.turn = true
+            println("Noir: Pas de placement possible, on passe ton tour")
+            //gm.turn = true
             return false
           }
         }
       }
     }
+    println("Move possible")
     return true
+  }
+
+  def bothCheckLegalMoves(): Boolean = {
+    //TODO
+    return false
   }
 
 
   def fillGrid(tab : Array[Array[Coin]]): Array[Array[Coin]] = {
     for(i <- tab.indices){
       for(j <- tab(i).indices){
-        var token: Coin = new Coin((i + 'A'.toInt).toChar, j+1, Color.green,false)
+        var token: Coin = new Coin(i, j, Color.green, false)
         tab(i)(j) = token
       }
     }
@@ -287,7 +299,7 @@ class Reversi {
 }
 
 
-class Coin(var row: Char, var col: Int, var c: Color, var busy: Boolean){
+class Coin(var row: Int, var col: Int, var c: Color, var busy: Boolean){
 
 }
 
@@ -315,27 +327,28 @@ class GameManager(var turn : Boolean) {
   def askPlacement(): String = {
     var choice: String = ""
     var caseSelected : String = ""
+
     if (!turn){
       println("Player 1 place your next coin (ex: A1)")
-      choice = Input.readString()
+      choice = Input.readString().toUpperCase
       caseSelected = ((choice(0)-65).toString + choice(1).toString)
-      while((caseSelected.toInt > 77) || (caseSelected.toInt < 0)){
+      while(!((choice(0) < 'A' || choice(0) > 'H') || (choice(1).toInt < 0 || choice(1).toInt > 7))){ // Check if the user's input is within the expected range
         println("Use the format: A0")
-        choice = Input.readString()
+        choice = Input.readString().toUpperCase
         caseSelected = ((choice(0)-65).toString + choice(1).toString)
       }
     } else if (turn){
       println("Player 2 place your next coin (ex: A0)")
-      choice = Input.readString()
+      choice = Input.readString().toUpperCase
       caseSelected = ((choice(0)-65).toString + choice(1).toString)
-      while((caseSelected.toInt > 77) || (caseSelected.toInt < 0)){
+      while(!((choice(0) < 'A' || choice(0) > 'H') || (choice(1).toInt < 0 || choice(1).toInt > 7))) { // Check if the user's input is within the expected range
         println("Use the format: A0")
-        choice = Input.readString()
+        choice = Input.readString().toUpperCase
         caseSelected = ((choice(0)-65).toString + choice(1).toString)
       }
     }
-    return caseSelected
-  }
+  return caseSelected
+}
 
 
 
@@ -347,5 +360,6 @@ object Reversi extends App{
 
   var g: Reversi = new Reversi
   g.play()
-
+  //g.fillGrid(g.grid)
+  //println(g.toString)
 }
