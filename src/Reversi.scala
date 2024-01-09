@@ -14,7 +14,6 @@ class Reversi {
 
   // testtt
 
-  // TODO
   def play(): Unit ={
     //fill grid with the default configuration
 
@@ -22,14 +21,18 @@ class Reversi {
     while((!checkFillGrid())){
       print(toString)
       println(gm.turn)
-      // si turn = true ET checklegel pour blanc = vrai => CHANGETURN (vice versa)
+      // si turn = true ET checklegal pour blanc = vrai => CHANGETURN (vice versa)
       if (!gm.turn){
         var step1: String = gm.askPlacement()
-
+        if(checkLegalMoves()){
+          gm.changeTurn()
+        }
         placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.BLACK)
       } else {
         var step1: String = gm.askPlacement()
-
+        if(checkLegalMoves()){
+          gm.changeTurn()
+        }
         placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.WHITE)
       }
 
@@ -55,6 +58,7 @@ class Reversi {
 
   // @param x, y: coordinate of chosen placement
   // @param color: color of players coin (the one who wants to make the move)
+  // returns: false when move not legal
   def isLegal(x: Int, y: Int, color: Color): Boolean = {
     if (isOccupied(x, y)){
       //println("Position is already occupied")
@@ -95,16 +99,14 @@ class Reversi {
     // if no valid line of coins was found in any direction, the move is not legal
     //println("No valid line of coins found")
     return false
-}
+  }
 
-  // TODO
 
   // @param x, y: coordinate of chosen coin placement
   // @param color: color of players coin (the one who wants to make the move)
   def placeCoin(x: Int, y: Int, c: Color): Unit = {
 
     if(!(isOccupied(x,y)) && isLegal(x,y,c)){
-
       grid(x)(y).busy = true
       grid(x)(y).c = c
       updateCoins(x,y,c)
@@ -120,7 +122,6 @@ class Reversi {
         if (i != 0 || j != 0) { // ignore current coin
           var nx: Int = x + i
           var ny: Int = y + j
-
 
           if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != c) {
             nx += i
@@ -179,32 +180,31 @@ class Reversi {
     return true
   }
 
-  // return true quand aucun move est Legal -> fin du jeu
+  // return true quand aucun move est Legal -> passe son tour
   // TODO: Modifier pour que la fonction de print rien ni change rien
   def checkLegalMoves(): Boolean = {
-    for (i <- grid.indices){
-      for(j <- grid(i).indices){
-        if(gm.turn){
-          println("blanc")
-          if (!(isLegal(i,j, Color.WHITE))) {
-            // si aucun move pour le blanc -> tour du noir
-            println("Blanc: Pas de placement possible, on passe ton tour")
-            //gm.turn = false
-            return false
-          }
-        } else {
-          println("noir")
-          if (!(isLegal(i,j,Color.BLACK))){
-            // si aucun move pour le noir -> tour du blanc
-            println("Noir: Pas de placement possible, on passe ton tour")
-            //gm.turn = true
+
+    if(gm.turn) {
+      for (i <- grid.indices) {
+        for (j <- grid(i).indices) {
+          if (isLegal(i, j, Color.WHITE)) {
             return false
           }
         }
       }
+      return true
+    } else {
+      for (i <- grid.indices) {
+        for (j <- grid(i).indices) {
+          if (isLegal(i,j,Color.BLACK)){
+            // si au moins un move possible ->
+            return false
+          }
+        }
+      }
+      return true
     }
-    println("Move possible")
-    return true
+
   }
 
   def bothCheckLegalMoves(): Boolean = {

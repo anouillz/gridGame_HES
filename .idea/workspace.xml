@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="test">
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Coin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Coin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -223,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704726747833</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves">
+      <option name="closed" value="true" />
+      <created>1704806264913</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1704806264913</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,7 +264,8 @@
     <MESSAGE value="made method updateCoin, tested and it works" />
     <MESSAGE value="changes useless" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -262,13 +276,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/Reversi.scala</url>
-          <line>358</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/Reversi.scala</url>
-          <line>189</line>
-          <option name="timeStamp" value="12" />
+          <line>198</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
