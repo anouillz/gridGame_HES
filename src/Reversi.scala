@@ -2,7 +2,6 @@ import java.awt.Color
 import hevs.graphics.FunGraphics
 import javax.swing.{JFrame, JOptionPane, JPasswordField}
 
-import java.awt.event
 
 class Reversi {
 
@@ -12,7 +11,6 @@ class Reversi {
   grid = fillGrid(grid)
   var gm : GameManager = new GameManager(false)
   var display: FunGraphics = new FunGraphics(650,800,"Reversi")
-
 
 
   def play(): Unit ={
@@ -100,8 +98,6 @@ class Reversi {
       count2 += 1
     }
 
-
-
   }
 
   def coinGraphics(x: Int, y: Int, couleur: Color): Unit = {
@@ -115,6 +111,16 @@ class Reversi {
         coinGraphics(j,i, grid(i)(j).c)
       }
     }
+
+    display.setColor(Color.white)
+    display.drawFilledCircle(140, 650, 65)
+    display.drawString(165,750,s"$countWhite",Color.WHITE, 30)
+
+    display.setColor(Color.black)
+    display.drawFilledCircle(450, 650, 65)
+    display.drawString(475,750,s"$countBlack",Color.black, 30)
+
+
   }
 
   def legalMovesGraphics(color: Color): Unit = {
@@ -122,7 +128,7 @@ class Reversi {
     display.setColor(Color.yellow)
 
     for(ind <- tab.indices){
-      display.drawFillRect(tab(ind).col*70 + 48, tab(ind).row*70 + 48, 65, 65)
+      display.drawFilledCircle((tab(ind).col+1)*70, (tab(ind).row+1)*70, 20)
     }
 
   }
