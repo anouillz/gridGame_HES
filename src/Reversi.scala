@@ -1,25 +1,25 @@
 import java.awt.Color
 import hevs.graphics.FunGraphics
+import javax.swing.{JFrame, JOptionPane, JPasswordField}
 
 import java.awt.event
-import java.awt.event.MouseListener
 
 class Reversi {
-  var grid: Array[Array[Coin]] = Array.ofDim(8,8)
+
   // better than Color.green
-  var darkGreen: Color = new Color(0,100,0)
+  var darkGreen: Color = new Color(50,100,70)
+  var grid: Array[Array[Coin]] = Array.ofDim(8,8)
   grid = fillGrid(grid)
   var gm : GameManager = new GameManager(false)
   var display: FunGraphics = new FunGraphics(650,800,"Reversi")
-  //display.addMouseListener(MouseListener)
 
 
-  // testtt
 
   def play(): Unit ={
-    //fill grid with the default configuration
 
-    // TODO: rajouter bothCheckLegal dans la condition
+
+    // TODO: rajouter bothCheckLegal dans la condition - ajouter si les joueurs veulent rejouer
+
     while((!checkFillGrid()) || (!(bothCheckLegalMoves()))){
       gridGraphics()
       print(toString)
@@ -32,6 +32,7 @@ class Reversi {
           gm.changeTurn()
           println(s"${gm.displayScore(countWhite(), countBlack())} ")
         }
+        legalMovesGraphics(Color.black)
         var step1: String = gm.askPlacement()
         placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.BLACK)
         println(s"${gm.displayScore(countWhite(), countBlack())} ")
@@ -41,6 +42,7 @@ class Reversi {
           gm.changeTurn()
           println(s"${gm.displayScore(countWhite(), countBlack())} ")
         }
+        legalMovesGraphics(Color.white)
         var step1: String = gm.askPlacement()
         placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.WHITE)
         println(s"${gm.displayScore(countWhite(), countBlack())} ")
@@ -65,6 +67,7 @@ class Reversi {
     var count1: Int = 0
     var lett: Int = 85
     var count2: Int = 'A'
+    display.setPenWidth(4f)
 
     // Background
     display.setColor(darkGreen)
@@ -74,6 +77,7 @@ class Reversi {
     display.setColor(Color.BLACK)
     display.drawRect(45,45,560,560)
 
+    display.setPenWidth(2f)
     //draws grid
     while(i < 605){
       display.drawLine(i, 45, i, 605)
@@ -113,6 +117,16 @@ class Reversi {
     }
   }
 
+  def legalMovesGraphics(color: Color): Unit = {
+    var tab: Array[Coin] = allLegalMoves(color)
+    display.setColor(Color.yellow)
+
+    for(ind <- tab.indices){
+      display.drawFillRect(tab(ind).col*70 + 48, tab(ind).row*70 + 48, 65, 65)
+    }
+
+  }
+
   def isOccupied(row: Int, col: Int): Boolean = {
     if (!grid(row)(col).busy){
       return false
@@ -121,15 +135,29 @@ class Reversi {
   }
 
 
-  // @param x, y: coordinate of chosen placement
-  // @param color: color of players coin (the one who wants to make the move)
-  // returns: false when move not legal
+  /**
+    @param x: coordinate of chosen placement
+    @param y: coordinate of chosen placement
+
+   */
+
+  /**
+   * Method that check if the selected placement by the player is possible or not
+   *  - Has to be next to the opposite color
+   *  - Has to be within the grid's borders
+   *  - The opposite coin's color has to be trapped between the player's coin's color
+   *
+   * @param x: coordinate of chosen placement
+   * @param y: coordinate of chosen placement
+   * @param color: Color of current player's coin
+   * @return true if there is a legal move
+   */
   def isLegal(x: Int, y: Int, color: Color): Boolean = {
-    if (isOccupied(x, y)){
-      println("Position is already occupied")
-      gm.askPlacement()
-      return false
-    }
+        if (isOccupied(x, y)){
+          //println("Position is already occupied")
+          //gm.askPlacement()
+          return false
+        }
 
     // on regarde toutes les directions possibles
     for (i <- -1 to 1) {
@@ -163,7 +191,6 @@ class Reversi {
     }
 
     // if no valid line of coins was found in any direction, the move is not legal
-    //println("No valid line of coins found")
     return false
   }
 
@@ -190,27 +217,41 @@ class Reversi {
         }
       }
     }
-
     return tab
 
   }
 
-  // @param x, y: coordinate of chosen coin placement
-  // @param color: color of players coin (the one who wants to make the move)
-  def placeCoin(x:Int, y: Int, c: Color): Unit = {
-//    if(isOccupied(x,y)) {
-//      println("Place occupied")
-//      gm.askPlacement()
-//    }
-    if(!(isOccupied(x,y)) && isLegal(x,y,c)){
+  /**
+   * Method that places the coin if the chosen placement is not occupied and legal
+   * Let's the user know if the chosen placement is already occupied
+   *
+   * @param x: coordinate of chosen placement
+   * @param y: coordinate of chosen placement
+   * @param color: Color of current player's coin
+   * @return
+   */
+  def placeCoin(x:Int, y: Int, color: Color): Unit = {
+    if(isOccupied(x,y)) {
+      println("Place occupied")
+      //TODO: display
+    }
+    if(!(isOccupied(x,y)) && isLegal(x,y,color)){
       grid(x)(y).busy = true
-      grid(x)(y).c = c
-      updateCoins(x,y,c)
+      grid(x)(y).c = color
+      updateCoins(x,y,color)
       gm.changeTurn()
     }
 }
 
 
+  /**
+   * This function updates the coins that might have been changed by a player's turn
+   * Is called in placeCoin
+   *
+   * @param x: coordinate of chosen placement
+   * @param y: coordinate of chosen placement
+   * @param color: Color of selected coin
+   */
   def updateCoins(x: Int, y: Int, c: Color): Unit = {
     // all possible directions
     for (i <- -1 to 1) {
@@ -249,7 +290,11 @@ class Reversi {
   }
 
 
-  // return true quand tout le plateau est occupé -> fin du jeu
+  /**
+   * Method that checks one of possible EndGames end if all the grid is filled which means that the game is over
+   *
+   * @return True if grid is completely filled
+   */
   def checkFillGrid(): Boolean = {
     for (i <- grid.indices) {
       for (j <- grid(i).indices) {
@@ -261,8 +306,12 @@ class Reversi {
     return true
   }
 
-  // param couleur: Couleur dominante
-  // return true quand il y a qu'une couleur -> fin du jeu
+  /**
+   *Method that checks
+   *
+   * @param couleur: Color that we want to check
+   * @return true if grid is filled with only one color
+   */
   def checkOneColorOnly(couleur: Color) : Boolean = {
     for (i <- grid.indices){
       for (j <- grid(i).indices){
@@ -335,6 +384,14 @@ class Reversi {
   }
 
 
+  /**
+   * Fills the gird
+   * All coins are green by default
+   * 4 Coins are placed in the center by default
+   *
+   * @param tab: array2D of Coins
+   * @return
+   */
   def fillGrid(tab : Array[Array[Coin]]): Array[Array[Coin]] = {
     for(i <- tab.indices){
       for(j <- tab(i).indices){
@@ -445,7 +502,12 @@ class GameManager(var turn : Boolean) {
     return s"White $w - $b Black"
   }
 
-  // TODO
+  /**
+   * Asks player's next move with format a1 or A1, ect.., that matches the view on the display
+   * Asks until players input valid format
+   *
+   * @return
+   */
   def askPlacement(): String = {
     var choice: String = ""
     var caseSelected : String = ""
@@ -469,8 +531,8 @@ class GameManager(var turn : Boolean) {
         caseSelected = ((choice(0)-65).toString + choice(1).toString)
       }
     }
-  return caseSelected
-}
+    return caseSelected
+  }
 
 
 
