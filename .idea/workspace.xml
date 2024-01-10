@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves">
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="Changed:&#10;- checkLegalMoves">
+      <change afterPath="$PROJECT_DIR$/src/test.sc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Coin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Coin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" afterDir="false" />
@@ -236,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704806264913</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Changed:&#10;- checkLegalMoves">
+      <option name="closed" value="true" />
+      <created>1704808460119</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1704808460119</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -265,7 +274,8 @@
     <MESSAGE value="changes useless" />
     <MESSAGE value="test" />
     <MESSAGE value="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves" />
+    <MESSAGE value="Changed:&#10;- checkLegalMoves" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed:&#10;- checkLegalMoves" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -274,11 +284,6 @@
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/Reversi.scala</url>
-          <line>198</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -6,9 +6,11 @@ import java.awt.event.MouseListener
 
 class Reversi {
   var grid: Array[Array[Coin]] = Array.ofDim(8,8)
+  // better than Color.green
+  var darkGreen: Color = new Color(0,100,0)
   grid = fillGrid(grid)
   var gm : GameManager = new GameManager(false)
-  //var display: FunGraphics = new FunGraphics(300,300,"Reversi")
+  var display: FunGraphics = new FunGraphics(650,800,"Reversi")
   //display.addMouseListener(MouseListener)
 
 
@@ -18,22 +20,30 @@ class Reversi {
     //fill grid with the default configuration
 
     // TODO: rajouter bothCheckLegal dans la condition
-    while((!checkFillGrid())){
+    while((!checkFillGrid()) || (!(bothCheckLegalMoves()))){
+      gridGraphics()
       print(toString)
+      updateGraphics()
       println(gm.turn)
       // si turn = true ET checklegal pour blanc = vrai => CHANGETURN (vice versa)
       if (!gm.turn){
-        var step1: String = gm.askPlacement()
         if(checkLegalMoves()){
+          println("changed turn")
           gm.changeTurn()
+          println(s"${gm.displayScore(countWhite(), countBlack())} ")
         }
+        var step1: String = gm.askPlacement()
         placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.BLACK)
+        println(s"${gm.displayScore(countWhite(), countBlack())} ")
       } else {
-        var step1: String = gm.askPlacement()
         if(checkLegalMoves()){
+          println("changed turn")
           gm.changeTurn()
+          println(s"${gm.displayScore(countWhite(), countBlack())} ")
         }
+        var step1: String = gm.askPlacement()
         placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.WHITE)
+        println(s"${gm.displayScore(countWhite(), countBlack())} ")
       }
 
     }
@@ -41,12 +51,67 @@ class Reversi {
     //TODO: Implémentez ce qui se passe quand méthode checkLegalMoves est vrai
 
 
+    //TODO: Dans le display, trouver la position pour afficher le score et l'actualiser en fonction
     if (countBlack()>countWhite()){
       print(s"Black win : $countBlack")
     }
     else print(s"White win : $countWhite()")
   }
 
+  def gridGraphics(): Unit = {
+    var i: Int = 115
+    var j: Int = 115
+    var nb: Int = 75
+    var count1: Int = 0
+    var lett: Int = 85
+    var count2: Int = 'A'
+
+    // Background
+    display.setColor(darkGreen)
+    display.drawFillRect(0,0,650,800)
+
+    //draws main board
+    display.setColor(Color.BLACK)
+    display.drawRect(45,45,560,560)
+
+    //draws grid
+    while(i < 605){
+      display.drawLine(i, 45, i, 605)
+      i += 70
+    }
+    while(j < 605){
+      display.drawLine(45, j, 605, j)
+      j += 70
+    }
+
+    //draws row and col
+    while(nb<605){
+      display.drawString(nb, 29, s"$count1", Color.BLACK, 20)
+      nb += 70
+      count1 += 1
+    }
+    while(lett < 605){
+      display.drawString(15, lett, s"${count2.toChar}", Color.BLACK, 20)
+      lett += 70
+      count2 += 1
+    }
+
+
+
+  }
+
+  def coinGraphics(x: Int, y: Int, couleur: Color): Unit = {
+    display.setColor(couleur)
+    display.drawFilledCircle(x*70 + 48, y*70 + 48, 65)
+  }
+
+  def updateGraphics(): Unit ={
+    for(i <- grid.indices){
+      for(j <- grid(i).indices){
+        coinGraphics(j,i, grid(i)(j).c)
+      }
+    }
+  }
 
   def isOccupied(row: Int, col: Int): Boolean = {
     if (!grid(row)(col).busy){
@@ -61,7 +126,8 @@ class Reversi {
   // returns: false when move not legal
   def isLegal(x: Int, y: Int, color: Color): Boolean = {
     if (isOccupied(x, y)){
-      //println("Position is already occupied")
+      println("Position is already occupied")
+      gm.askPlacement()
       return false
     }
 
@@ -102,10 +168,40 @@ class Reversi {
   }
 
 
+  // array of all possible legal placements
+  // TODO: where to call it ?
+  def allLegalMoves(color: Color): Array[Coin] = {
+    // var tab: Array[Array[Coin]] =
+    var count: Int = 0
+
+    for (i <- grid.indices){
+      for(j <- grid(i).indices){
+        if(isLegal(i,j,color)) count += 1
+      }
+    }
+
+    var tab: Array[Coin] = new Array(count)
+    var k = 0
+    for (i <- grid.indices){
+      for(j <- grid(i).indices){
+        if(isLegal(i,j,color)) {
+          tab(k) = new Coin(i, j, Color.yellow, false)
+          k += 1
+        }
+      }
+    }
+
+    return tab
+
+  }
+
   // @param x, y: coordinate of chosen coin placement
   // @param color: color of players coin (the one who wants to make the move)
-  def placeCoin(x: Int, y: Int, c: Color): Unit = {
-
+  def placeCoin(x:Int, y: Int, c: Color): Unit = {
+//    if(isOccupied(x,y)) {
+//      println("Place occupied")
+//      gm.askPlacement()
+//    }
     if(!(isOccupied(x,y)) && isLegal(x,y,c)){
       grid(x)(y).busy = true
       grid(x)(y).c = c
@@ -122,15 +218,14 @@ class Reversi {
         if (i != 0 || j != 0) { // ignore current coin
           var nx: Int = x + i
           var ny: Int = y + j
+          var continueFlipping: Boolean = true
 
+          // Check initial adjacent coin
           if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != c) {
-            nx += i
-            ny += j
-
-            // goes in the same direction
-            while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy) {
+            // Move in the direction to find a coin of the same color
+            while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && continueFlipping) {
               if (grid(nx)(ny).c == c) {
-                // if next position is a coin of the same color, flip all the coins in the line
+                // Flip coins if the same color coin is found
                 var flipX: Int = x + i
                 var flipY: Int = y + j
                 while ((flipX != nx || flipY != ny) && grid(flipX)(flipY).busy) {
@@ -138,13 +233,14 @@ class Reversi {
                   flipX += i
                   flipY += j
                 }
-                // instruction to leave the loop after flipping all the coins
-                nx = 8
-
+                // Stop flipping
+                continueFlipping = false
               }
-
-              nx += i
-              ny += j
+              // Proceed to next coin in the line
+              if (continueFlipping) {
+                nx += i
+                ny += j
+              }
             }
           }
         }
@@ -207,8 +303,34 @@ class Reversi {
 
   }
 
+  //returns true if no more legal moves for any color
   def bothCheckLegalMoves(): Boolean = {
-    //TODO
+
+    var white: Boolean = false
+    var black: Boolean = false
+
+    // check white
+    for (i <- grid.indices) {
+      for (j <- grid(i).indices) {
+        if (!(isLegal(i, j, Color.WHITE))) {
+          white = true
+        }
+      }
+    }
+
+    //check black
+    for (i <- grid.indices) {
+      for (j <- grid(i).indices) {
+        if (!(isLegal(i, j, Color.BLACK))) {
+          black = true
+        }
+      }
+    }
+
+    if(white && black){
+      return true
+    }
+
     return false
   }
 
@@ -216,7 +338,7 @@ class Reversi {
   def fillGrid(tab : Array[Array[Coin]]): Array[Array[Coin]] = {
     for(i <- tab.indices){
       for(j <- tab(i).indices){
-        var token: Coin = new Coin(i, j, Color.green, false)
+        var token: Coin = new Coin(i, j, darkGreen, false)
         tab(i)(j) = token
       }
     }
@@ -266,7 +388,7 @@ class Reversi {
     s += "\n"
 
     for (i <- grid.indices) {
-      s += i + "\t"
+      s += (i +65).toChar + "\t"
       for (j <- grid(i).indices) {
         //s += "\t"
         if (grid(i)(j).col <= 8) {
@@ -319,8 +441,8 @@ class GameManager(var turn : Boolean) {
   }
 
 
-  def displayscore(w : Int, b : Int): String = {
-    return s"$w - $b"
+  def displayScore(w : Int, b : Int): String = {
+    return s"White $w - $b Black"
   }
 
   // TODO
