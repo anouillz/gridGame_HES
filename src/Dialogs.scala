@@ -43,6 +43,24 @@ object Dialogs {
     else getChar("Just one character")
   }
 
+  def getString(message: String, turn : Boolean) : String = {
+    if (turn){
+      val frame = new JFrame("Player 2 (White) : Place your next coin ( ex: \"A0\")")
+      val s = JOptionPane.showInputDialog(frame, message)
+      if (s == null) System.exit(-1)
+      return s
+    }
+    else {
+      val frame = new JFrame("Player 1 (Black) : Place your next coin ( ex: \"A0\")")
+      val s = JOptionPane.showInputDialog(frame, message)
+      if (s == null) System.exit(-1)
+      return s
+    }
+
+
+
+  }
+
   /**
    * Open a dialog box to display a message.
    *

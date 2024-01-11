@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="New graphics:&#10;- all possible placements in yellow to make it easier and faster">
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="First try method play">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Coin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Coin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dialogs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dialogs.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +52,9 @@
     <setting file="jar://$PROJECT_DIR$/fungraphics-1.5.12.jar!/hevs/index.html" root0="SKIP_INSPECTION" />
     <setting file="jar://$PROJECT_DIR$/fungraphics-1.5.12.jar!/hevs/package.scala" root0="SKIP_INSPECTION" />
     <setting file="jar://$PROJECT_DIR$/fungraphics-1.5.12.jar!/hevs/utils/Input.scala" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
@@ -228,39 +232,7 @@
       <option name="project" value="LOCAL" />
       <updated>1704726747833</updated>
     </task>
-    <task id="LOCAL-00015" summary="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves">
-      <option name="closed" value="true" />
-      <created>1704806264913</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1704806264913</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Changed:&#10;- checkLegalMoves">
-      <option name="closed" value="true" />
-      <created>1704808460119</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1704808460119</updated>
-    </task>
-    <task id="LOCAL-00017" summary="New graphics:&#10;- grid&#10;- updated Coins (works :-) )">
-      <option name="closed" value="true" />
-      <created>1704903810075</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1704903810075</updated>
-    </task>
-    <task id="LOCAL-00018" summary="New graphics:&#10;- all possible placements in yellow to make it easier and faster">
-      <option name="closed" value="true" />
-      <created>1704907000501</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1704907000501</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,11 +260,7 @@
     <MESSAGE value="made method updateCoin, tested and it works" />
     <MESSAGE value="changes useless" />
     <MESSAGE value="test" />
-    <MESSAGE value="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves" />
-    <MESSAGE value="Changed:&#10;- checkLegalMoves" />
-    <MESSAGE value="New graphics:&#10;- grid&#10;- updated Coins (works :-) )" />
-    <MESSAGE value="New graphics:&#10;- all possible placements in yellow to make it easier and faster" />
-    <option name="LAST_COMMIT_MESSAGE" value="New graphics:&#10;- all possible placements in yellow to make it easier and faster" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

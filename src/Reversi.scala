@@ -55,7 +55,9 @@ class Reversi {
     if (countBlack()>countWhite()){
       print(s"Black win : $countBlack")
     }
-    else print(s"White win : $countWhite()")
+    else {
+      print(s"White win : $countWhite()")
+    }
   }
 
   def gridGraphics(): Unit = {
@@ -332,7 +334,6 @@ class Reversi {
   }
 
   // return true quand aucun move est Legal -> passe son tour
-  // TODO: Modifier pour que la fonction de print rien ni change rien
   def checkLegalMoves(): Boolean = {
 
     if(gm.turn) {
@@ -489,11 +490,6 @@ class Coin(var row: Int, var col: Int, var c: Color, var busy: Boolean){
 }
 
 class GameManager(var turn : Boolean) {
-  def askGameMode(): Unit = {
-    println("Game mode: 1 player (1) - 2 players (2)")
-    var gameMode = Input.readInt()
-  }
-
   def changeTurn(): Unit = {
     // false = noir
     // true = blanc
