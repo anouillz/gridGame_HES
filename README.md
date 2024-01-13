@@ -14,8 +14,8 @@ This is a school project for HEVS Sion. It is a Scala implementation of the clas
 
 ## Installation and Running the Game
 To run this game with its graphical interface:
-1. Clone the repository: `git clone [URL]`
-2. Navigate to the repository directory: `cd reversi-game`
+1. Clone the repository: `git clone (https://github.com/anouillz/gridGame_HES.git)`
+2. Navigate to the repository directory: `cd gridGame_HES.git`
 3. Compile and run the game: `scalac Reversi.scala && scala Reversi`
 
 ## How to Play
