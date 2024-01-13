@@ -1,7 +1,7 @@
 # Reversi Game with Graphics in Scala
 
 ## Introduction
-This is a school project for HEVS Sion. It is a Scala implementation of the classic board game Reversi, also known as Othello. It's a strategy game for two players, played on an 8x8 board with graphics.
+This is a school project for the School of engineering HES-SO Valais//Wallis. It is a Scala implementation of the classic board game Reversi, also known as Othello. It's a strategy game for two players, played on an 8x8 board with graphics.
 
 ## Features
 - Graphical gameplay.
