@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="First try method play">
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="New graphics:&#10;- changed yellow squares for small yellow dots for esthetic">
+      <change afterPath="$PROJECT_DIR$/res/coin-flip-shimmer-85750.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Coin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Coin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Dialogs$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Dialogs$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Dialogs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Dialogs.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" afterDir="false" />
@@ -68,22 +71,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Reversi.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/anagoncalves/IdeaProjects/GridGame/src&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.intellij.sdk.settings.AppSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Reversi.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/anagoncalves/IdeaProjects/GridGame/src",
+    "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/res" />
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -232,7 +237,39 @@
       <option name="project" value="LOCAL" />
       <updated>1704726747833</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves">
+      <option name="closed" value="true" />
+      <created>1704806264913</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1704806264913</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Changed:&#10;- checkLegalMoves">
+      <option name="closed" value="true" />
+      <created>1704808460119</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1704808460119</updated>
+    </task>
+    <task id="LOCAL-00017" summary="New graphics:&#10;- grid&#10;- updated Coins (works :-) )">
+      <option name="closed" value="true" />
+      <created>1704903810075</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1704903810075</updated>
+    </task>
+    <task id="LOCAL-00018" summary="New graphics:&#10;- all possible placements in yellow to make it easier and faster">
+      <option name="closed" value="true" />
+      <created>1704907000501</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1704907000501</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,7 +297,11 @@
     <MESSAGE value="made method updateCoin, tested and it works" />
     <MESSAGE value="changes useless" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="Fixed lots of bugs on play method &#10;- Out of bound because of Char conversion&#10;- changeTurns&#10;- checkLegalMoves" />
+    <MESSAGE value="Changed:&#10;- checkLegalMoves" />
+    <MESSAGE value="New graphics:&#10;- grid&#10;- updated Coins (works :-) )" />
+    <MESSAGE value="New graphics:&#10;- all possible placements in yellow to make it easier and faster" />
+    <option name="LAST_COMMIT_MESSAGE" value="New graphics:&#10;- all possible placements in yellow to make it easier and faster" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

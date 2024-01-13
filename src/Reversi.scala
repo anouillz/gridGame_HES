@@ -1,65 +1,103 @@
 import java.awt.Color
 import hevs.graphics.FunGraphics
-import javax.swing.{JFrame, JOptionPane, JPasswordField}
+import javax.sound.sampled.AudioSystem
+import java.io.File
 
 
+/**
+ * The game is played on a 8x8 grid (Default)
+ * The game is played by two players (Default)
+ * The players take turns to place their coins on the grid
+ * The player's coin's color is either black or white
+ * The game ends when the grid is completely filled or when no more legal moves for both players are possible
+ * The player with the most coins of his color wins
+ *
+ * @version 1.0
+ *
+ */
 class Reversi {
 
   // better than Color.green
   var darkGreen: Color = new Color(50,100,70)
+
+  //creates grid
   var grid: Array[Array[Coin]] = Array.ofDim(8,8)
-  grid = fillGrid(grid)
+  grid = fillGrid(grid) // necessary outside of play because of other functions
+
+  var answer: Char = ' '
   var gm : GameManager = new GameManager(false)
-  var display: FunGraphics = new FunGraphics(650,800,"Reversi")
+  var display: FunGraphics = new FunGraphics(650,800,"Reversi | Othello")
 
 
-  def play(): Unit ={
+  /**
+   * Method that starts the game
+   *  - Fills the grid
+   *  - Displays the grid
+   *  - Asks for the first player's move
+   *  - Checks if the move is legal
+   *  - Places the coin if the move is legal
+   *  - Updates the grid's visuals
+   *  - Changes the turn
+   *  - Repeats until the grid is filled or no more legal moves for both players are possible
+   *  - Displays the winner
+   *  - Asks if the players want to play again
+   *
+   * @return true if the players want to play again
+   */
+  def play(): Boolean ={
 
+    //in case of replay
+    grid = fillGrid(grid)
 
-    // TODO: rajouter bothCheckLegal dans la condition - ajouter si les joueurs veulent rejouer
-
-    while((!checkFillGrid()) || (!(bothCheckLegalMoves()))){
+    // game loop -> while grid not filled and no more legal moves for both players
+    while((!checkFillGrid()) && (!(bothCheckLegalMoves()))){
       gridGraphics()
-      print(toString)
       updateGraphics()
-      println(gm.turn)
-      // si turn = true ET checklegal pour blanc = vrai => CHANGETURN (vice versa)
+
       if (!gm.turn){
+        // if no more legal moves for BLACK -> WHITE plays
         if(checkLegalMoves()){
           println("changed turn")
           gm.changeTurn()
-          println(s"${gm.displayScore(countWhite(), countBlack())} ")
+          legalMovesGraphics(Color.white)
+        } else {
+          legalMovesGraphics(Color.black)
+          var step1: String = gm.askPlacement()
+          placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.BLACK)
         }
-        legalMovesGraphics(Color.black)
-        var step1: String = gm.askPlacement()
-        placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.BLACK)
-        println(s"${gm.displayScore(countWhite(), countBlack())} ")
+
       } else {
         if(checkLegalMoves()){
           println("changed turn")
           gm.changeTurn()
-          println(s"${gm.displayScore(countWhite(), countBlack())} ")
+          legalMovesGraphics(Color.black)
+        } else {
+          legalMovesGraphics(Color.white)
+          var step1: String = gm.askPlacement()
+          placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.WHITE)
         }
-        legalMovesGraphics(Color.white)
-        var step1: String = gm.askPlacement()
-        placeCoin(step1(0).toInt - 48 ,step1(1).toInt - 48,Color.WHITE)
-        println(s"${gm.displayScore(countWhite(), countBlack())} ")
       }
-
     }
 
-    //TODO: Implémentez ce qui se passe quand méthode checkLegalMoves est vrai
 
-
-    //TODO: Dans le display, trouver la position pour afficher le score et l'actualiser en fonction
     if (countBlack()>countWhite()){
-      print(s"Black win : $countBlack")
+      updateGraphics()
+      scoreGraphics(s"Black win: $countBlack")
+      answer = Dialogs.getChar("Do you wanna play again ? (y)")
+      return true
     }
     else {
-      print(s"White win : $countWhite()")
+      updateGraphics()
+      scoreGraphics(s"White win: $countWhite")
+      answer = Dialogs.getChar("Do you wanna play again ? (y)")
+      return true
     }
+    return false
   }
 
+  /**
+   * Method that draws the grid, rows, columns and the coins
+   */
   def gridGraphics(): Unit = {
     var i: Int = 115
     var j: Int = 115
@@ -102,11 +140,21 @@ class Reversi {
 
   }
 
+  /**
+   * Method that draws the coins
+   *
+   * @param x: coordinate of chosen placement
+   * @param y: coordinate of chosen placement
+   * @param couleur: Color of selected coin
+   */
   def coinGraphics(x: Int, y: Int, couleur: Color): Unit = {
     display.setColor(couleur)
     display.drawFilledCircle(x*70 + 48, y*70 + 48, 65)
   }
 
+  /**
+   * updates the grid's visuals
+   */
   def updateGraphics(): Unit ={
     for(i <- grid.indices){
       for(j <- grid(i).indices){
@@ -114,6 +162,7 @@ class Reversi {
       }
     }
 
+    // draws current score
     display.setColor(Color.white)
     display.drawFilledCircle(140, 650, 65)
     display.drawString(165,750,s"$countWhite",Color.WHITE, 30)
@@ -121,10 +170,24 @@ class Reversi {
     display.setColor(Color.black)
     display.drawFilledCircle(450, 650, 65)
     display.drawString(475,750,s"$countBlack",Color.black, 30)
-
-
   }
 
+  /**
+   * draws the final score
+   *
+   * @param s: String that contains the score, will depend on the winner
+   */
+  def scoreGraphics(s: String): Unit = {
+    display.setColor(darkGreen)
+    display.drawFillRect(0, 650, 650, 150)
+    display.drawString(225, 700, s, Color.BLACK, 40)
+  }
+
+  /**
+   * draws the legal moves for the current player with a small yellow circle
+   *
+   * @param color: Color of current player's coin
+   */
   def legalMovesGraphics(color: Color): Unit = {
     var tab: Array[Coin] = allLegalMoves(color)
     display.setColor(Color.yellow)
@@ -132,9 +195,15 @@ class Reversi {
     for(ind <- tab.indices){
       display.drawFilledCircle((tab(ind).col+1)*70, (tab(ind).row+1)*70, 20)
     }
-
   }
 
+  /**
+   * Method that checks if the selected placement by the player is occupied or not
+   *
+   * @param row: coordinate of chosen placement
+   * @param col: coordinate of chosen placement
+   * @return true if the placement is occupied
+   */
   def isOccupied(row: Int, col: Int): Boolean = {
     if (!grid(row)(col).busy){
       return false
@@ -142,12 +211,6 @@ class Reversi {
     return true
   }
 
-
-  /**
-    @param x: coordinate of chosen placement
-    @param y: coordinate of chosen placement
-
-   */
 
   /**
    * Method that check if the selected placement by the player is possible or not
@@ -162,12 +225,10 @@ class Reversi {
    */
   def isLegal(x: Int, y: Int, color: Color): Boolean = {
         if (isOccupied(x, y)){
-          //println("Position is already occupied")
-          //gm.askPlacement()
           return false
         }
 
-    // on regarde toutes les directions possibles
+    // we check all possible directions, up, down and diagonals
     for (i <- -1 to 1) {
       for (j <- -1 to 1) {
         if (i != 0 || j != 0) { // ignore position of chosen coin
@@ -175,18 +236,19 @@ class Reversi {
           var ny: Int = y + j
           var continueLoop: Boolean = true //control the loop
 
-          // Check if the next position is inside the grid and contains a coin of the opposite color
+          // check if the next position is inside the grid AND contains a coin of the opposite color
           if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != color) {
             nx += i
             ny += j
 
             // continue in the same direction
             while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && continueLoop) {
-              // If the next position is empty, set continueLoop to false to stop the loop
+              // if the next position is empty, set continueLoop to false to stop the loop
+              // it means that the move is not legal
               if (!grid(nx)(ny).busy) {
                 continueLoop = false
               } else if (grid(nx)(ny).c == color) {
-                // If the next position contains a coin of the same color -> the move is legal
+                // if the next position contains a coin of the player's color -> the move is legal
                 return true
               }
 
@@ -203,12 +265,16 @@ class Reversi {
   }
 
 
-  // array of all possible legal placements
-  // TODO: where to call it ?
+  /**
+   * Method that returns an array of all the legal moves for the current player
+   *
+   * @param color: Color of current player's coin
+   * @return array of all legal moves
+   */
   def allLegalMoves(color: Color): Array[Coin] = {
-    // var tab: Array[Array[Coin]] =
     var count: Int = 0
 
+    // used to know the size of the array
     for (i <- grid.indices){
       for(j <- grid(i).indices){
         if(isLegal(i,j,color)) count += 1
@@ -240,12 +306,13 @@ class Reversi {
    */
   def placeCoin(x:Int, y: Int, color: Color): Unit = {
     if(isOccupied(x,y)) {
-      println("Place occupied")
-      //TODO: display
+      Dialogs.displayMessage("Place occupied, choose a valid placement")
     }
+    // if the placement is not occupied and legal -> place the coin
     if(!(isOccupied(x,y)) && isLegal(x,y,color)){
       grid(x)(y).busy = true
       grid(x)(y).c = color
+
       updateCoins(x,y,color)
       gm.changeTurn()
     }
@@ -269,23 +336,33 @@ class Reversi {
           var ny: Int = y + j
           var continueFlipping: Boolean = true
 
-          // Check initial adjacent coin
+          // we check all directions
           if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && grid(nx)(ny).c != c) {
-            // Move in the direction to find a coin of the same color
+            // continue in the same direction
             while (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && grid(nx)(ny).busy && continueFlipping) {
               if (grid(nx)(ny).c == c) {
-                // Flip coins if the same color coin is found
+                // flip coins if the same color coin is found
                 var flipX: Int = x + i
                 var flipY: Int = y + j
                 while ((flipX != nx || flipY != ny) && grid(flipX)(flipY).busy) {
+                  // plays the sound of a flipped coin
+                  try {
+                    val audioInputStream = AudioSystem.getAudioInputStream(new File("res/coin-flip-shimmer-85750.wav"))
+                    val clip = AudioSystem.getClip
+                    clip.open(audioInputStream)
+                    clip.start()
+                  } catch {
+                    case e: Exception => e.printStackTrace()
+                  }
+
                   grid(flipX)(flipY).c = c
                   flipX += i
                   flipY += j
                 }
-                // Stop flipping
+                // stop flipping coins if the same color coin is found
                 continueFlipping = false
               }
-              // Proceed to next coin in the line
+              // proceed to next coin in the line
               if (continueFlipping) {
                 nx += i
                 ny += j
@@ -306,7 +383,7 @@ class Reversi {
   def checkFillGrid(): Boolean = {
     for (i <- grid.indices) {
       for (j <- grid(i).indices) {
-        if (!(grid(i)(j).busy)) {
+        if (!grid(i)(j).busy) {
           return false
         }
       }
@@ -315,25 +392,10 @@ class Reversi {
   }
 
   /**
-   *Method that checks
+   * Method that checks if there is no more legal moves for the current player
    *
-   * @param couleur: Color that we want to check
-   * @return true if grid is filled with only one color
+   * @return True if no more legal moves for the current player
    */
-  def checkOneColorOnly(couleur: Color) : Boolean = {
-    for (i <- grid.indices){
-      for (j <- grid(i).indices){
-        if (grid(i)(j).busy){
-          if(couleur != grid(i)(j).c){
-            return false
-          }
-        }
-      }
-    }
-    return true
-  }
-
-  // return true quand aucun move est Legal -> passe son tour
   def checkLegalMoves(): Boolean = {
 
     if(gm.turn) {
@@ -359,17 +421,21 @@ class Reversi {
 
   }
 
-  //returns true if no more legal moves for any color
+  /**
+   * Method that checks if there is no more legal moves for both players -> end of game
+   *
+   * @return True if no more legal moves for both players
+   */
   def bothCheckLegalMoves(): Boolean = {
 
-    var white: Boolean = false
-    var black: Boolean = false
+    var white: Boolean = true
+    var black: Boolean = true
 
     // check white
     for (i <- grid.indices) {
       for (j <- grid(i).indices) {
         if (!(isLegal(i, j, Color.WHITE))) {
-          white = true
+          white = false
         }
       }
     }
@@ -378,7 +444,7 @@ class Reversi {
     for (i <- grid.indices) {
       for (j <- grid(i).indices) {
         if (!(isLegal(i, j, Color.BLACK))) {
-          black = true
+          black = false
         }
       }
     }
@@ -418,6 +484,11 @@ class Reversi {
     return tab
   }
 
+  /**
+   * Counts the number of white coins
+   *
+   * @return number of white coins
+   */
   def countWhite(): Int = {
     var count : Int = 0
     for (i <- grid.indices){
@@ -430,6 +501,11 @@ class Reversi {
     return count
   }
 
+  /**
+   * Counts the number of black coins
+   *
+   * @return number of black coins
+   */
   def countBlack(): Int = {
     var count: Int = 0
     for (i <- grid.indices) {
@@ -442,7 +518,12 @@ class Reversi {
     return count
   }
 
-  // test game in the console -- O = white coins -- X = black coins
+  /**
+   * Method that displays the grid in the console
+   * Used for tests
+   *
+   * @return String that contains the grid
+   */
   override def toString: String = {
     var s: String = ""
     s += "Game:  \n\t"
@@ -484,11 +565,28 @@ class Reversi {
 
 }
 
-
+/**
+ * Class Coin
+ *  - Contains the coordinates of the coin
+ *  - Contains the color of the coin
+ *  - Contains a boolean that indicates if the coin is occupied or not
+ *
+ * @param row: coordinate of chosen placement
+ * @param col: coordinate of chosen placement
+ * @param c: Color of selected coin
+ * @param busy: boolean that indicates if the coin is occupied or not
+ */
 class Coin(var row: Int, var col: Int, var c: Color, var busy: Boolean){
 
 }
 
+/**
+ * Class GameManager
+ *  - Contains the turn of the current player
+ *  - Contains the score of both players
+ *
+ * @param turn: boolean that indicates the turn of the current player, true = white, false = black
+ */
 class GameManager(var turn : Boolean) {
   def changeTurn(): Unit = {
     // false = noir
@@ -508,35 +606,33 @@ class GameManager(var turn : Boolean) {
    * Asks player's next move with format a1 or A1, ect.., that matches the view on the display
    * Asks until players input valid format
    *
-   * @return
+   * @return String that contains the player's next move
    */
   def askPlacement(): String = {
     var choice: String = ""
     var caseSelected : String = ""
 
     if (!turn){
-      println("Player 1 place your next coin (ex: A1)")
-      choice = Input.readString().toUpperCase
+      choice = Dialogs.getString("Player 1 (Black) : Place your next coin ( ex: \"A0\")").toUpperCase
+      while ((choice.length != 2) || (choice.isEmpty)) choice = Dialogs.getString("Player 1 (Black) : Place your next coin ( ex: \"A0\")").toUpperCase
       caseSelected = ((choice(0)-65).toString + choice(1).toString)
       while(!((choice(0) < 'A' || choice(0) > 'H') || (choice(1).toInt < 0 || choice(1).toInt > 7))){ // Check if the user's input is within the expected range
         println("Use the format: A0")
-        choice = Input.readString().toUpperCase
+        choice = Dialogs.getString("Player 1 (Black) : Place your next coin ( ex: \"A0\")").toUpperCase
         caseSelected = ((choice(0)-65).toString + choice(1).toString)
       }
     } else if (turn){
-      println("Player 2 place your next coin (ex: A0)")
-      choice = Input.readString().toUpperCase
+      choice = Dialogs.getString("Player 2 (White) : Place your next coin ( ex: \"A0\")").toUpperCase
+      while ((choice.length != 2) || (choice.isEmpty)) choice = Dialogs.getString("Player 2 (White) : Place your next coin ( ex: \"A0\")").toUpperCase
       caseSelected = ((choice(0)-65).toString + choice(1).toString)
       while(!((choice(0) < 'A' || choice(0) > 'H') || (choice(1).toInt < 0 || choice(1).toInt > 7))) { // Check if the user's input is within the expected range
         println("Use the format: A0")
-        choice = Input.readString().toUpperCase
+        choice = Dialogs.getString("Player 2 (White) : Place your next coin ( ex: \"A0\")").toUpperCase
         caseSelected = ((choice(0)-65).toString + choice(1).toString)
       }
     }
     return caseSelected
   }
-
-
 
 }
 
@@ -545,7 +641,11 @@ class GameManager(var turn : Boolean) {
 object Reversi extends App{
 
   var g: Reversi = new Reversi
-  g.play()
-  //g.fillGrid(g.grid)
-  //println(g.toString)
+
+  do {
+    while (!g.play()) {
+      g.play()
+    }
+  } while (g.answer == 'y')
+
 }
