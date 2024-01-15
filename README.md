@@ -31,6 +31,9 @@ To run this game with its graphical interface:
 - `GameManager`: Manages the game logic and player turns.
 
 ## Screenshots
-![Reversi Game Screenshot](res/ReversiGame.png) 
+
+<img src="res/ReversiGame.png" alt="drawing" width="500"/>
+
+
 
 
