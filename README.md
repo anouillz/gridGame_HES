@@ -16,13 +16,13 @@ This is a school project for the _School of engineering_ HES-SO Valais//Wallis. 
 To run this game with its graphical interface:
 1. Clone the repository: `git clone https://github.com/anouillz/gridGame_HES.git`
 2. Navigate to the repository directory: `cd gridGame_HES`
-3. Compile and run the game: `scalac Reversi.scala && scala Reversi`
+3. Compile and run the game: `scalac src/Reversi.scala && scala Reversi`
 
 ## How to Play
 - Players take turns placing coins on the board.
 - Chose where you wanna place the coin by indicating its coordinates.
 - The valid coordinates are recognisable by a yellow dot.
-    - A move is valid if it traps a coin of the oposite player.
+    - A move is valid if it traps a coin of the opposite player.
 - The game continues until one players wins.
 
 ## Code Structure
