@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="New graphics:&#10;- changed yellow squares for small yellow dots for esthetic">
-      <change afterPath="$PROJECT_DIR$/res/coin-flip-shimmer-85750.wav" afterDir="false" />
+    <list default="true" id="7f958c33-9f4f-4f39-83e1-25f4b7a967b5" name="Changes" comment="Changes: &#10;- Sound&#10;- Fixed bugs&#10;- Added the option to replay the game&#10;- Added comments, should be complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Coin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Coin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Dialogs$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Dialogs$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GridGame/Dialogs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Dialogs.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/GameManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi$delayedInit$body.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GridGame/Reversi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dialogs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dialogs.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reversi.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reversi.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -269,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704907000501</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Changes: &#10;- Sound&#10;- Fixed bugs&#10;- Added the option to replay the game&#10;- Added comments, should be complete">
+      <option name="closed" value="true" />
+      <created>1705146163120</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1705146163120</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -301,7 +306,8 @@
     <MESSAGE value="Changed:&#10;- checkLegalMoves" />
     <MESSAGE value="New graphics:&#10;- grid&#10;- updated Coins (works :-) )" />
     <MESSAGE value="New graphics:&#10;- all possible placements in yellow to make it easier and faster" />
-    <option name="LAST_COMMIT_MESSAGE" value="New graphics:&#10;- all possible placements in yellow to make it easier and faster" />
+    <MESSAGE value="Changes: &#10;- Sound&#10;- Fixed bugs&#10;- Added the option to replay the game&#10;- Added comments, should be complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes: &#10;- Sound&#10;- Fixed bugs&#10;- Added the option to replay the game&#10;- Added comments, should be complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

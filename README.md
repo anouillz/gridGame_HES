@@ -22,7 +22,7 @@ To run this game with its graphical interface:
 - Players take turns placing coins on the board.
 - Chose where you wanna place the coin by indicating its coordinates.
 - The valid coordinates are recognisable by a yellow dot.
-    - A move is valid if it traps a coin of the oposite player
+    - A move is valid if it traps a coin of the oposite player.
 - The game continues until one players wins.
 
 ## Code Structure
@@ -31,6 +31,6 @@ To run this game with its graphical interface:
 - `GameManager`: Manages the game logic and player turns.
 
 ## Screenshots
-![Reversi Game Screenshot](res/ReversiGame.png)
+![Reversi Game Screenshot](res/ReversiGame.png) 
 
 

@@ -18,7 +18,7 @@ import java.io.File
 class Reversi {
 
   // better than Color.green
-  var darkGreen: Color = new Color(50,100,70)
+  private var darkGreen: Color = new Color(50,100,70)
 
   //creates grid
   var grid: Array[Array[Coin]] = Array.ofDim(8,8)
